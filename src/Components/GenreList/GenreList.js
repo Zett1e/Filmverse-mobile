@@ -2,13 +2,13 @@ import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import Api from "../../Api";
 import GenreListCard from "./GenreListCard";
-import MyText from "../MyText";
+import MyText from "../TextStyle/MyText";
 
-const GenreList = ({ url, title }) => {
+const GenreList = ({ url, title, type }) => {
   const [movies, setMovies] = useState([]);
 
-  const api = async () => {
-    await Api.get(url)
+  const api = () => {
+    Api.get(url)
       .then((res) => {
         setMovies(res.data.results);
       })
@@ -30,7 +30,7 @@ const GenreList = ({ url, title }) => {
         initialNumToRender={20}
         data={movies}
         keyExtractor={(d) => d.id}
-        renderItem={({ item }) => <GenreListCard item={item} />}
+        renderItem={({ item }) => <GenreListCard item={item} type={type} />}
       />
     </View>
   );

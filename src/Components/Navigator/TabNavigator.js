@@ -1,17 +1,16 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../Screens/HomeScreen";
-import WatchList from "../Screens/WatchList";
-import Profile from "../Screens/Profile";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { FontAwesome } from "@expo/vector-icons";
-import Category from "../Screens/Category";
-import Header from "./Header";
-import MyText from "./MyText";
+import HomeScreen from "../../Screens/HomeScreen";
+import WatchList from "../../Screens/WatchList";
+import Profile from "../../Screens/Profile";
 
-const Navigator = () => {
-  const Stack = createNativeStackNavigator();
+import { FontAwesome } from "@expo/vector-icons";
+import Category from "../../Screens/Category";
+import Header from "../Header";
+import MyText from "../TextStyle/MyText";
+
+const TabNavigator = () => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
@@ -46,15 +45,7 @@ const Navigator = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          headerTitle: () => (
-            <Header>
-              <Image
-                style={styles.logo}
-                source={require("../../assets/Logo/filmverse_black.png")}
-              />
-            </Header>
-          ),
-
+          headerTitle: () => <Header />,
           tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="home"
@@ -68,11 +59,7 @@ const Navigator = () => {
         name="Category"
         component={Category}
         options={{
-          headerTitle: () => (
-            <Header>
-              <MyText style={styles.title}>Category</MyText>
-            </Header>
-          ),
+          headerTitle: () => <MyText style={styles.title}>Category</MyText>,
           tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="list"
@@ -86,11 +73,7 @@ const Navigator = () => {
         name="WatchList"
         component={WatchList}
         options={{
-          headerTitle: () => (
-            <Header>
-              <MyText style={styles.title}>Watchlist</MyText>
-            </Header>
-          ),
+          headerTitle: () => <MyText style={styles.title}>Watchlist</MyText>,
           tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="bookmark"
@@ -104,11 +87,7 @@ const Navigator = () => {
         name="Profile"
         component={Profile}
         options={{
-          headerTitle: () => (
-            <Header>
-              <MyText style={styles.title}>Profile</MyText>
-            </Header>
-          ),
+          headerTitle: () => <MyText style={styles.title}>Profile</MyText>,
           tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="user"
@@ -122,7 +101,7 @@ const Navigator = () => {
   );
 };
 
-export default Navigator;
+export default TabNavigator;
 
 const styles = StyleSheet.create({
   logo: {

@@ -6,10 +6,9 @@ import PopularCard from "./PopularCard";
 const Popular = () => {
   const [movies, setMovies] = useState([]);
 
-  const api = async () => {
-    await Api.get("/movie/popular")
+  const api = () => {
+    Api.get("/movie/popular")
       .then((res) => {
-        // console.log(res.data.results[0].title);
         setMovies(res.data.results);
       })
       .catch((err) => {

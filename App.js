@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/native";
 
 import { StyleSheet, Text, View } from "react-native";
-import Navigator from "./src/Components/Navigator";
+import StackNavigator from "./src/Components/Navigator/StackNavigator";
 
 export default function App() {
   const MyTheme = {
@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <Navigator />
+      <StackNavigator />
     </NavigationContainer>
   );
 }

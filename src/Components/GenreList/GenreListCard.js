@@ -1,19 +1,25 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { memo } from "react";
-import MyText from "../MyText";
+import MyText from "../TextStyle/MyText";
+import { useNavigation } from "@react-navigation/native";
 
-const GenreListCard = ({ item }) => {
+const GenreListCard = ({ item, type }) => {
+  const navigation = useNavigation();
   const poster = "https://image.tmdb.org/t/p/original";
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.poster}
-        source={{ uri: poster + item.poster_path }}
-      />
-      <MyText style={styles.title}>
-        {item.title ? item.title : item.name}
-      </MyText>
-    </View>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Detail", { id: item.id, type: type })}
+    >
+      <View style={styles.container}>
+        <Image
+          style={styles.poster}
+          source={{ uri: poster + item.poster_path }}
+        />
+        <MyText style={styles.title}>
+          {item.title ? item.title : item.name}
+        </MyText>
+      </View>
+    </TouchableOpacity>
   );
 };
 
