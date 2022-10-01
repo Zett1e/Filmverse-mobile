@@ -70,10 +70,17 @@ const Detail = ({ route }) => {
             color="gray"
           />
         </TouchableOpacity>
-        <Image
-          style={[styles.poster, { width: width }]}
-          source={{ uri: poster + detail.backdrop_path }}
-        />
+        {detail.backdrop_path ? (
+          <Image
+            style={[styles.poster, { width: width }]}
+            source={{ uri: poster + detail.backdrop_path }}
+          />
+        ) : (
+          <Image
+            style={{ resizeMode: "contain", height: 200 }}
+            source={require("../../assets/Image/NoImage.png")}
+          />
+        )}
         <LinearGradient
           colors={["transparent", "#151515"]}
           locations={[0, 0.04]}

@@ -1,8 +1,10 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Header = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.header}>
       <Image
@@ -10,7 +12,7 @@ const Header = () => {
         source={require("../../assets/Logo/filmverse_black.png")}
       />
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("SearchScreen")}>
         <FontAwesome
           style={{ marginRight: 10 }}
           name="search"

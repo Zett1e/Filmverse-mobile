@@ -47,28 +47,45 @@ const Cast = ({ id, type }) => {
     <View style={{ marginTop: 20 }}>
       <MyText style={{ fontSize: 20 }}>Cast</MyText>
 
-      <FlatList
-        data={credit.slice(0, 11)}
-        horizontal
-        keyExtractor={(cast) => cast.id}
-        renderItem={({ item }) => (
-          <View style={{ marginRight: 15, marginTop: 10, width: 60 }}>
-            {isLoading ? (
-              <ActivityIndicator color="#78808c" />
-            ) : (
+      {isLoading ? (
+        <ActivityIndicator color="#78808c" />
+      ) : credit.length ? (
+        <FlatList
+          data={credit.slice(0, 11)}
+          horizontal
+          keyExtractor={(cast) => cast.id}
+          renderItem={({ item }) => (
+            <View style={{ marginRight: 15, marginTop: 10, width: 60 }}>
               <View>
-                <Image
-                  style={styles.cast}
-                  source={{ uri: poster + item?.profile_path }}
-                />
+                {item.profile_path ? (
+                  <Image
+                    style={styles.cast}
+                    source={{ uri: poster + item?.profile_path }}
+                  />
+                ) : (
+                  <Image
+                    style={[
+                      styles.cast,
+                      {
+                        resizeMode: "contain",
+                        backgroundColor: "#3A3A3A",
+                      },
+                    ]}
+                    source={require("../../../assets/Image/user.png")}
+                  />
+                )}
                 <SecText style={{ fontSize: 10, textAlign: "center" }}>
                   {item?.name}
                 </SecText>
               </View>
-            )}
-          </View>
-        )}
-      />
+            </View>
+          )}
+        />
+      ) : (
+        <MyText style={{ textAlign: "center" }}>
+          No Cast Available To Show
+        </MyText>
+      )}
     </View>
   );
 };

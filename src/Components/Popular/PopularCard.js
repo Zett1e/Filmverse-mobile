@@ -23,10 +23,17 @@ const PopularCard = ({ item }) => {
       }
     >
       <View style={[styles.posterCotainer, { width: width - 80 }]}>
-        <Image
-          style={styles.poster}
-          source={{ uri: poster + item.backdrop_path }}
-        ></Image>
+        {item.backdrop_path ? (
+          <Image
+            style={styles.poster}
+            source={{ uri: poster + item.backdrop_path }}
+          ></Image>
+        ) : (
+          <Image
+            style={[styles.poster, { resizeMode: "stretch" }]}
+            source={require("../../../assets/Image/NoImage.png")}
+          />
+        )}
 
         <View style={styles.caption}>
           <MyText style={styles.title}>

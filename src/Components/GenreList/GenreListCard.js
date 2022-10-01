@@ -11,10 +11,17 @@ const GenreListCard = ({ item, type }) => {
       onPress={() => navigation.navigate("Detail", { id: item.id, type: type })}
     >
       <View style={styles.container}>
-        <Image
-          style={styles.poster}
-          source={{ uri: poster + item.poster_path }}
-        />
+        {item.poster_path ? (
+          <Image
+            style={styles.poster}
+            source={{ uri: poster + item.poster_path }}
+          />
+        ) : (
+          <Image
+            style={[styles.poster, { resizeMode: "stretch" }]}
+            source={require("../../../assets/Image/NoImage.png")}
+          />
+        )}
         <MyText style={styles.title}>
           {item.title ? item.title : item.name}
         </MyText>

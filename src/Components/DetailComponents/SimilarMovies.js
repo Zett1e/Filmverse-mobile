@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MyText from "../TextStyle/MyText";
 import Api from "../../Api";
 import { useNavigation } from "@react-navigation/native";
@@ -15,6 +15,7 @@ const SimilarMovies = ({ id, type, onPressTouch }) => {
   const [similar, setSimilar] = useState([]);
   const poster = "https://image.tmdb.org/t/p/original";
   const navigation = useNavigation();
+  const scrollRefX = useRef();
 
   let url;
 
@@ -38,18 +39,27 @@ const SimilarMovies = ({ id, type, onPressTouch }) => {
     api();
   }, [id]);
 
+  const onPressTouchX = () => {
+    scrollRefX.current?.scrollToOffset({
+      offset: 0,
+      animated: true,
+    });
+  };
+
   return (
-    <View style={{ marginTop: 20 }}>
+    <View style={{ marginTop: 20, marginBottom: 10 }}>
       <MyText style={{ fontSize: 20, marginBottom: 10 }}>
         {type === "movie" ? "Similar Movies" : "Similar Tv Series"}
       </MyText>
       <FlatList
+        ref={scrollRefX}
         horizontal
         data={similar}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => {
               onPressTouch();
+              onPressTouchX();
               navigation.navigate("Detail", { id: item.id, type: type });
             }}
           >
@@ -61,7 +71,7 @@ const SimilarMovies = ({ id, type, onPressTouch }) => {
                 />
               ) : (
                 <Image
-                  style={styles.poster}
+                  style={[styles.poster, { resizeMode: "stretch" }]}
                   source={require("../../../assets/Image/NoImage.png")}
                 />
               )}
@@ -83,7 +93,6 @@ const styles = StyleSheet.create({
   container: {
     width: 100,
     marginRight: 20,
-    marginBottom: 15,
   },
   poster: {
     width: 100,

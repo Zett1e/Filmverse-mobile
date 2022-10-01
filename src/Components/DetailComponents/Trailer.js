@@ -55,7 +55,7 @@ const Trailer = ({ id, type }) => {
             source={{ uri: `https://www.youtube.com/embed/${trailerKey}` }}
           />
         ) : (
-          <MyText style={{ textAlign: "center" }}>No Trailer Availavle</MyText>
+          <MyText style={{ textAlign: "center" }}>No Trailer Available</MyText>
         )}
       </View>
     </View>
