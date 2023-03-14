@@ -11,6 +11,7 @@ import SearchScreen from "../../Screens/SearchScreen";
 import Intro from "../../Screens/Intro";
 import LoginScreen from "../../Screens/LoginScreen";
 import RegisterScreen from "../../Screens/RegisterScreen";
+import GenreScreen from "../../Screens/GenreScreen";
 
 const StackNavigator = () => {
   const Stack = createStackNavigator();
@@ -28,6 +29,14 @@ const StackNavigator = () => {
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen
+        name="Genre"
+        component={GenreScreen}
+        options={{
+          headerShown: true,
+          headerStyle: { backgroundColor: "#1A1A1A" },
+        }}
+      />
     </Stack.Navigator>
   );
 };

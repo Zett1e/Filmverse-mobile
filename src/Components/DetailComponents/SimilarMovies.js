@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   StyleSheet,
@@ -12,6 +13,7 @@ import Api from "../../Api";
 import { useNavigation } from "@react-navigation/native";
 
 const SimilarMovies = ({ id, type, onPressTouch }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [similar, setSimilar] = useState([]);
   const poster = "https://image.tmdb.org/t/p/original";
   const navigation = useNavigation();
@@ -29,6 +31,7 @@ const SimilarMovies = ({ id, type, onPressTouch }) => {
     Api.get(url)
       .then((res) => {
         setSimilar(res.data.results);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -51,38 +54,42 @@ const SimilarMovies = ({ id, type, onPressTouch }) => {
       <MyText style={{ fontSize: 20, marginBottom: 10 }}>
         {type === "movie" ? "Similar Movies" : "Similar Tv Series"}
       </MyText>
-      <FlatList
-        ref={scrollRefX}
-        horizontal
-        data={similar}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => {
-              onPressTouch();
-              onPressTouchX();
-              navigation.navigate("Detail", { id: item.id, type: type });
-            }}
-          >
-            <View style={styles.container}>
-              {item.poster_path ? (
-                <Image
-                  style={styles.poster}
-                  source={{ uri: poster + item.poster_path }}
-                />
-              ) : (
-                <Image
-                  style={[styles.poster, { resizeMode: "stretch" }]}
-                  source={require("../../../assets/Image/NoImage.png")}
-                />
-              )}
-              <MyText style={styles.title}>
-                {" "}
-                {item.title ? item.title : item.name}{" "}
-              </MyText>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+
+      {isLoading ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <FlatList
+          ref={scrollRefX}
+          horizontal
+          data={similar}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => {
+                onPressTouch();
+                onPressTouchX();
+                navigation.navigate("Detail", { id: item.id, type: type });
+              }}
+            >
+              <View style={styles.container}>
+                {item.poster_path ? (
+                  <Image
+                    style={styles.poster}
+                    source={{ uri: poster + item.poster_path }}
+                  />
+                ) : (
+                  <Image
+                    style={[styles.poster, { resizeMode: "stretch" }]}
+                    source={require("../../../assets/Image/NoImage.png")}
+                  />
+                )}
+                <MyText style={styles.title}>
+                  {item.title ? item.title : item.name}
+                </MyText>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      )}
     </View>
   );
 };

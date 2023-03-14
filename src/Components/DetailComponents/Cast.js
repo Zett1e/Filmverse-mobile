@@ -48,7 +48,7 @@ const Cast = ({ id, type }) => {
       <MyText style={{ fontSize: 20 }}>Cast</MyText>
 
       {isLoading ? (
-        <ActivityIndicator color="#78808c" />
+        <ActivityIndicator />
       ) : credit.length ? (
         <FlatList
           data={credit.slice(0, 11)}

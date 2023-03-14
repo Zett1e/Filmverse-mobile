@@ -9,6 +9,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import Category from "../../Screens/Category";
 import Header from "../Header";
 import MyText from "../TextStyle/MyText";
+import DropdownHeader from "../DropdownHeader";
 
 const TabNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -16,9 +17,8 @@ const TabNavigator = () => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        // contentStyle: { backgroundColor: "#1A1A1A" },
         tabBarShowLabel: false,
-        // headerShown: false,
+
         headerStyle: {
           backgroundColor: "#1A1A1A",
           elevation: 0,
@@ -59,7 +59,8 @@ const TabNavigator = () => {
         name="Category"
         component={Category}
         options={{
-          headerTitle: () => <MyText style={styles.title}>Category</MyText>,
+          // headerTitle: () => <DropdownHeader />,
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="list"

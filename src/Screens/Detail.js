@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   ScrollView,
@@ -22,6 +23,7 @@ import Trailer from "../Components/DetailComponents/Trailer";
 import SimilarMovies from "../Components/DetailComponents/SimilarMovies";
 
 const Detail = ({ route }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
   const { width } = useWindowDimensions();
   const { id, type } = route.params;
@@ -43,6 +45,7 @@ const Detail = ({ route }) => {
     Api.get(url)
       .then((res) => {
         setDetail(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -70,7 +73,11 @@ const Detail = ({ route }) => {
             color="gray"
           />
         </TouchableOpacity>
-        {detail.backdrop_path ? (
+        {isLoading ? (
+          <View style={{ zIndex: 10, height: 200, justifyContent: "center" }}>
+            <ActivityIndicator size="large" />
+          </View>
+        ) : detail.backdrop_path ? (
           <Image
             style={[styles.poster, { width: width }]}
             source={{ uri: poster + detail.backdrop_path }}

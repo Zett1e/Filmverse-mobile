@@ -9,7 +9,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView>
       <View style={styles.body}>
-        <ScrollView>
+        <ScrollView removeClippedSubviews={true}>
           <Popular />
           <GenreList
             url={"/trending/movie/day"}

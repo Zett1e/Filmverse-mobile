@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MyText from "../Components/TextStyle/MyText";
 import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import Api from "../Api";
 import { useNavigation } from "@react-navigation/native";
 
@@ -33,7 +34,17 @@ const SearchScreen = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <View
+        style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}
+      >
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <FontAwesome5
+            style={styles.backArrow}
+            name="arrow-left"
+            size={24}
+            color="gray"
+          />
+        </TouchableOpacity>
         <View style={styles.container}>
           <TextInput
             style={styles.textInput}
@@ -53,16 +64,19 @@ const SearchScreen = () => {
             }}
           >
             <FontAwesome
-              style={{ marginLeft: 10 }}
+              style={{ marginLeft: 0 }}
               name="search"
               size={26}
               color={"#1A1A1A"}
             />
           </TouchableOpacity>
         </View>
+      </View>
+      <ScrollView>
         <View style={styles.resultContainer}>
           {movie.map((data) => (
             <TouchableOpacity
+              key={data.id}
               onPress={() => {
                 navigation.navigate("Detail", {
                   id: data.id,
@@ -70,7 +84,7 @@ const SearchScreen = () => {
                 });
               }}
             >
-              <View key={data.id} style={styles.movieCard}>
+              <View style={styles.movieCard}>
                 {data.poster_path ? (
                   <Image
                     style={styles.poster}
@@ -83,8 +97,7 @@ const SearchScreen = () => {
                   />
                 )}
                 <MyText style={styles.title}>
-                  {" "}
-                  {data.title ? data?.title : data?.name}{" "}
+                  {data.title ? data?.title : data?.name}
                 </MyText>
               </View>
             </TouchableOpacity>
@@ -103,9 +116,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
     flexDirection: "row",
-    width: "90%",
+    width: "80%",
     backgroundColor: "gray",
     borderRadius: 20,
+  },
+  textInput: {
+    width: "85%",
+    height: 40,
+    paddingHorizontal: 20,
   },
   resultContainer: {
     flexDirection: "row",
@@ -114,11 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 20,
   },
-  textInput: {
-    width: "85%",
-    height: 40,
-    paddingHorizontal: 20,
-  },
+
   poster: {
     width: 100,
     height: 150,
@@ -133,5 +147,10 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     fontSize: 13,
+  },
+  backArrow: {
+    marginTop: 20,
+    marginRight: 15,
+    marginLeft: 10,
   },
 });

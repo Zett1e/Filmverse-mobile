@@ -48,7 +48,7 @@ const Trailer = ({ id, type }) => {
       <MyText style={{ fontSize: 20 }}>Official Trailer</MyText>
       <View style={[styles.container]}>
         {isLoading ? (
-          <ActivityIndicator size="large" color="#78808c" />
+          <ActivityIndicator size="large" />
         ) : trailerKey ? (
           <WebView
             style={{ borderRadius: 5 }}
