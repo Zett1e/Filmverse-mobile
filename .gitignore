@@ -14,4 +14,4 @@ web-build/
 .DS_Store
 
 #Project-wide
-ApiKey.js
+.env

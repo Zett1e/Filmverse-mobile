@@ -18,7 +18,6 @@ const Popular = () => {
 
   useEffect(() => {
     api();
-    // console.log(movies);
   }, []);
 
   return (

@@ -1,9 +1,8 @@
 import axios from "axios";
-import api_key from "./ApiKey";
 
 export default axios.create({
-  baseURL: "https://api.themoviedb.org/3",
+  baseURL: process.env.EXPO_PUBLIC_BASE_URL,
   params: {
-    api_key: api_key,
+    api_key: process.env.EXPO_PUBLIC_API_KEY,
   },
 });

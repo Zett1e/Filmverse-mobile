@@ -26,7 +26,6 @@ const Cast = ({ id, type }) => {
   }
 
   const api = () => {
-    // console.log(id);
     Api.get(url)
       .then((res) => {
         setCredit(res.data.cast);
@@ -40,8 +39,6 @@ const Cast = ({ id, type }) => {
   useEffect(() => {
     api();
   }, [id, type]);
-
-  // console.log(id);
 
   return (
     <View style={{ marginTop: 20 }}>
